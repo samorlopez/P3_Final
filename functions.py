@@ -21,6 +21,24 @@ def search_recipe_by_ingredients(ingredients, number, ranking):
         return data
     return []
 
+def search_recipe_required_ingredients(ingredients, number):
+    url = BASE_URL + 'recipes/complexSearch'
+    params = {
+        'apiKey' : API_KEY,
+        'number' : number,
+        'includeIngredients' : ingredients,
+        'instructionsRequired' : True,
+        'ignorePantry' : True,
+        'fillIngredients' : True
+    }
+
+    response = requests.get(url, params=params)
+    if response.status_code == 200:
+        data = response.json()
+        pprint(data)
+        return data['results']
+    return []
+
 def get_recipe_info(recipe_id):
     url = BASE_URL + 'recipes/' + recipe_id + '/information'
     params = {
@@ -36,7 +54,7 @@ def get_recipe_info(recipe_id):
 
 def main():
     print("Hello World")
-    pprint(search_recipe_by_ingredients("chicken", 3))
+    pprint(search_recipe_required_ingredients("chicken"))
 
 if __name__ == "__main__":
     try:

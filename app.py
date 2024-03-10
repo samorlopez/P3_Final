@@ -14,7 +14,11 @@ def results():
     if request.method == "POST":
         form_data = request.form
         pprint(form_data)
-        recipes = functions.search_recipe_by_ingredients(form_data["ingredients"], form_data["number"], form_data["ranking"])
+
+        if form_data["ranking"] == 3:
+            recipes = functions.search_recipe_required_ingredients(form_data["ingredients"], form_data["number"])
+        else:
+            recipes = functions.search_recipe_by_ingredients(form_data["ingredients"], form_data["number"], form_data["ranking"])
 
         session["recipes"] = recipes
         session["ingredients"] = form_data["ingredients"]
