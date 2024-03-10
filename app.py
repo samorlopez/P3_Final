@@ -15,10 +15,12 @@ def results():
         form_data = request.form
         pprint(form_data)
 
-        if form_data["ranking"] == 3:
+        if "minimize-ingredients" not in form_data.keys():
             recipes = functions.search_recipe_required_ingredients(form_data["ingredients"], form_data["number"])
+            if len(recipes) == 0:
+                recipes = functions.search_recipe_by_ingredients(form_data["ingredients"], form_data["number"], 1)
         else:
-            recipes = functions.search_recipe_by_ingredients(form_data["ingredients"], form_data["number"], form_data["ranking"])
+            recipes = functions.search_recipe_by_ingredients(form_data["ingredients"], form_data["number"], 2)
 
         session["recipes"] = recipes
         session["ingredients"] = form_data["ingredients"]

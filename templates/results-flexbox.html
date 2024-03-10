@@ -19,14 +19,19 @@
         <img class="result_image" src="{{ recipe.image }}">
         <br>
         <a href="{{ url_for('render_recipe', recipe_id = recipe.id) }}"> {{ recipe.title }} </a>
-        <p> Uses ingredients:
+        <p> Uses:
             {% for ingredient in recipe.usedIngredients %}
                 {{ingredient.name}},
             {% endfor %}
         </p>
-        <p>Missing ingredients:
+        <p>Missing:
             {% for ingredient in recipe.missedIngredients %}
                 {{ingredient.name}},
+            {% endfor %}
+        </p>
+        <p>Doesn't use:
+            {% for ingredient in recipe.unusedIngredients %}
+            {{ingredient.name}},
             {% endfor %}
         </p>
 <!--        <p>Ingredients:-->

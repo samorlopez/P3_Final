@@ -47,15 +47,16 @@ input {
     width: 20%;
 }
 
-input[type='radio'] {
+input[type='radio'], input[type='checkbox'] {
     width: 1rem;
     height: 1rem;
     float: left;
     clear: none;
     margin: 2px 0 5px 0px;
+    accent-color: #f79845;
 }
 
-.radio-text {
+.radio-text, .checkbox-text {
     float: left;
     clear: none;
     display: block;
@@ -66,17 +67,20 @@ input[type='radio'] {
     background: #f79845;
     cursor: pointer;
     font-weight : bold;
-    margin-top: 20px
+    margin-top: 20px;
+    border-color: #f79845;
 }
 
 .search-recipes:hover {
     background: #ffad66;
     font-weight : bold;
-    margin-top: 20px
+    margin-top: 20px;
+    border-color: #f79845;
 }
 
 .search-recipes:active {
     background: #ffad66;
+    border-color: #f79845;
     box-shadow: inset 0px 0px 5px #a6662e;
     font-weight : bold;
     margin-top: 20px
