@@ -1,0 +1,8 @@
+#recipes {
+    background-color: blue;
+    display: flex;
+}
+
+.recipe {
+    width: 400px;
+}

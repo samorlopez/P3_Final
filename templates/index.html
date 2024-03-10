@@ -1,10 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block main %}
 
-</body>
-</html>
+<div id="index-main">
+
+    <div id="description">
+        <i>Can I Cook It</i> finds recipes for you using <br>ingredients you already have in your fridge or pantry!
+    </div>
+
+<form action="/results" method="post">
+            <p>
+                <label for="ingredients">Ingredients</label><br>
+                <input type="text" placeholder = "e.g. milk, eggs, sugar" id="ingredients" name="ingredients" required>
+            </p>
+
+            <p>
+                <label for="number">Number of recipes</label><br>
+                <input type="number" id="number" name="number" value = 10 max=50 required>
+            </p>
+            <p>
+                <input type="radio" id="ranking-1" name="ranking" value=1 required>
+                <label class="radio-text" for="ranking-1">Maximize used ingredients first</label><br>
+            </p>
+            <p>
+                <input type="radio" id="ranking-2" name="ranking" value=2 required>
+                <label class="radio-text" for="ranking-2">Minimize missing ingredients first</label><br>
+            </p>
+            <p>
+                <input class="search-recipes" type="submit" value="FIND RECIPES">
+            </p>
+</form>
+
+</div>
+{% endblock %}

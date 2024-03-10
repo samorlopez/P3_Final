@@ -1,10 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block main %}
 
-</body>
-</html>
+{% if recipes|length == 0 %}
+<p>No recipes were found for the following ingredients: <i>{{ingredients}}</i> <br>
+<a href="{{ url_for('index') }}"> Return to main menu </a> </p>
+
+{% else %}
+<a href="{{ url_for('index') }}"> Return to main menu </a>
+
+<div id="results-main">
+
+    <header>
+        <h3>Recipes that use {{ingredients}}</h3>
+    </header>
+
+    <table>
+    <tbody>
+    {% for recipe in recipes %}
+        <tr>
+            <td>
+                <img class="small_image" src="{{ recipe.image }}">
+                <br>
+                <a href="{{ url_for('render_recipe', recipe_id = recipe.id) }}"> {{ recipe.title }} </a>
+                <p> Uses ingredients:
+                    {% for ingredient in recipe.usedIngredients %}
+                        {{ingredient.name}},
+                    {% endfor %}
+                </p>
+                <p>Missing ingredients:
+                {% for ingredient in recipe.missedIngredients %}
+                    {{ingredient.name}},
+                {% endfor %}
+                </p>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+
+</div>
+{% endif %}
+
+{% endblock %}

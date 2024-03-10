@@ -1,31 +1,31 @@
-from secrets import API_KEY
+from secret_api import API_KEY
 from pprint import pprint
 import requests
 BASE_URL = "https://api.spoonacular.com/"
 
-def search_recipe(query):
-    url = BASE_URL + 'recipes/complexSearch'
-    params = {
-        'apiKey' : API_KEY,
-        'query' : query,
-        'number' : 10,
-        'instructionsRequired' : True
-    }
-    response = requests.get(url, params=params)
-    if response.status_code == 200:
-        data = response.json()
-        return data['results']
-
-    return []
-
-def search_recipe_by_ingredients(ingredients, ranking, number):
+def search_recipe_by_ingredients(ingredients, number, ranking):
     url = BASE_URL + 'recipes/findByIngredients'
     params = {
         'apiKey' : API_KEY,
         'ingredients' : ingredients,
         'number' : number,
         'instructionsRequired' : True,
-        'ranking' : ranking
+        'ranking' : ranking,
+        'ignorePantry' : True
+    }
+
+    response = requests.get(url, params=params)
+    if response.status_code == 200:
+        data = response.json()
+        #pprint(data)
+        return data
+    return []
+
+def get_recipe_info(recipe_id):
+    url = BASE_URL + 'recipes/' + recipe_id + '/information'
+    params = {
+        'apiKey': API_KEY,
+        'includeNutrition' : False
     }
 
     response = requests.get(url, params=params)
@@ -36,8 +36,7 @@ def search_recipe_by_ingredients(ingredients, ranking, number):
 
 def main():
     print("Hello World")
-    #pprint(search_recipe("Pasta"))
-    pprint(search_recipe_by_ingredients("chicken", 1, 3))
+    pprint(search_recipe_by_ingredients("chicken", 3))
 
 if __name__ == "__main__":
     try:

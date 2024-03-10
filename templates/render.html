@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block main %}
+<div id="render-recipe-main">
+
+    <header>
+        <h1>{{recipe.title}}</h1>
+    </header>
+
+    <main>
+
+        <a href=" {{ url_for('results') }} ">back to Recipes</a>
+    </main>
+
+</div>
+{% endblock %}
